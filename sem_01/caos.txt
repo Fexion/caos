@@ -1,0 +1,3 @@
+&& - posledovatel'noe vipolnenie programm, pri uslovii, chto vse zavershilis' s 1
+||
+;
