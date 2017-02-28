@@ -21,6 +21,7 @@ nc:
 .global nc
 
 nextchar:
+    pushl %ebx
     cmp   $0, flag_eof
     jnz   eof
 
@@ -47,9 +48,11 @@ end:
     movzbl array(,%eax,1), %eax
     movl %eax, nc
     addl  $1, cur_el
+    popl %ebx
     ret
 eof:
     movl $-1, %eax
     movl $-1, nc
     movl $1, flag_eof
+    popl %ebx
     ret
