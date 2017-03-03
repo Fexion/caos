@@ -43,7 +43,7 @@ struct FileContent read_file(int fd) {
             return content;
         } else if (read_size) {
             new_size = content.size + read_size;
-            tmp = realloc(content.data, new_size + sizeof(*tmp));
+            //tmp = realloc(content.data, new_size + sizeof(*tmp));
             if (tmp) {
                 content.data = tmp;
             } else {
