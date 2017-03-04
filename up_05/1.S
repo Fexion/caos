@@ -1,15 +1,37 @@
-
 .text
 .global extract
+
 extract:
-    mov 8(%esp), %eax
-    mov 12(%esp), %ecx
-    mov 16(%esp), %edx
+        pushl   %ebp
+        movl    %esp, %ebp
 
-    shl %ecx, %eax
-    mov %eax, %ecx
-    shl %edx, %ecx
-    shr %edx, %ecx
-    sub %ecx, %eax
+        cmpl    $0, 12(%ebp)
+        jne     forward
+        cmpl    $32, 16(%ebp)
+        jne     forward
+        movl    8(%ebp), %eax
 
-    ret
+        movl    %ebp, %esp
+        popl    %ebp
+        ret
+forward:
+        movl    12(%ebp), %eax
+        movl    %eax, %ecx
+        shrl    %cl, 8(%ebp)
+
+        movl    16(%ebp), %eax
+        movl    8(%ebp), %edx
+        movl    %eax, %ecx
+        shrl    %cl, %edx
+
+        movl    16(%ebp), %eax
+        movl    %eax, %ecx
+
+        sall    %cl, %edx
+        movl    8(%ebp), %eax
+
+        subl    %edx, %eax
+
+        movl    %ebp, %esp
+        popl    %ebp
+        ret
