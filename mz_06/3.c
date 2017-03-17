@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <sys/time.h>
-
+ 
 int main(int argc, char const *argv[]) {
     argc--;
     int year, month_day, day ;
