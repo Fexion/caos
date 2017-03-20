@@ -15,11 +15,20 @@ struct Node
 void printing_some_tree(int file, int32_t node_idx) {
     struct Node nd;
 
-    lseek(file, 4 * 3 * node_idx, SEEK_SET); //not magic enough, 4 bytes per int * 3 int
+    lseek(file, sizeof(int) * 3 * node_idx, SEEK_SET); //not magic enough, sizeof int * 3 int
+    //about errors, caused by unused argc
+    //here are my compile flags
+    //"clang
+    //--std=gnu11
+    //-Werror -Wall -Wextra -O2
+    //-fsanitize=address -fsanitize=leak -fsanitize=undefined 
+    //-fno-sanitize-recover=undefined,integer -fstack-protector"
 
-    //if (read(file, &key, 4) == -1)
-    //if (read(file, &left_idx, 4) == -1)
-    //if (read(file, &right_idx, 4) == -1)
+
+    //also, can u fix scores of rejected tasks, they are 50 instead of 100 & 40 instead of 90
+    //and what about tasks with 20 score, is it OK for them? they were accepted from the first attempt
+
+
 
     read(file, &nd.key, 4);
     read(file, &nd.left_idx, 4);
