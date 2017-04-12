@@ -30,13 +30,13 @@ int main() {
 
 
     if (num == 0) {
-        wait(&first_child_Pid);
-        wait(&second_child_Pid);
-        wait(&third_child_Pid);
+        wait(NULL);
+        wait(NULL);
+        wait(NULL);
     } else {
         char buff[buff_size];
         int32_t digit;
-        
+
         read(0, &buff, buff_size);
         sscanf(buff, "%d", &digit);
         printf("%d %d\n", num, digit * digit);
