@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]) {
     fprintf(file, ")");
 
     fclose(file);
-    close(script);
+    
 
     execlp("./script.py", "script.py", (char *)NULL);
     return 0;

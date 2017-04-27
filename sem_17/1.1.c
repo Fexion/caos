@@ -14,9 +14,6 @@ int main(int argc, char const *argv[]) {
         dup2(file_out_d, 1);
 
         execlp(argv[1], argv[1], (char *)NULL);
-
-        close(file_in_d);
-        close(file_out_d);
     }
     wait(NULL);
     return 0;
