@@ -19,13 +19,16 @@ void handler3(int sig) {
 }
 
 int main() {
-    sigset_t set;
+    sigset_t set, emptyset;
 
-    sigfillset(&set);
+    sigemptyset(&set);
+    sigemptyset(&emptyset);
 
-    sigdelset(&set, SIGUSR1);
-    sigdelset(&set, SIGUSR2);
-    sigdelset(&set, SIGTERM);
+    sigaddset(&set, SIGUSR1);
+    sigaddset(&set, SIGUSR2);
+    sigaddset(&set, SIGTERM);
+
+    sigprocmask(SIG_BLOCK, &set, NULL);
 
     signal(SIGUSR1, handler1);
     signal(SIGUSR2, handler2);
@@ -37,18 +40,19 @@ int main() {
     uint64_t counter1 = 0;
     uint64_t counter2 = 0;
     while (1) {
-        while (sigsuspend(&set) != -1) {
-
+        while (!state) {
+            sigsuspend(&emptyset);
         }
         if (state == 2) {
             ++counter2;
         } else if (state == 1) {
-            printf ("%" PRIu64 " %" PRIu64 "\n", counter1, counter2);
+            printf ("%"PRIu64" %"PRIu64"\n", counter1, counter2);
             fflush(stdout);
             ++counter1;
         } else if (state == 3) {
             exit(0);
         }
+        state = 0;
     }
     return 0;
 }
